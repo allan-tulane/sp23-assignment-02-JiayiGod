@@ -1,6 +1,6 @@
 # CMPS 2200 Assignment 2
 
-**Name:**_________________________
+**Name:**_______Jiayi Xu__________________
 
 In this assignment we'll work on applying the methods we've learned to analyze recurrences, and also see their behavior
 in practice. As with previous
@@ -13,55 +13,58 @@ and push to your github repository.
 1. Derive asymptotic upper bounds of work for each recurrence below.
   * $W(n)=2W(n/3)+1$
 .  
-.  
+.  leaf dominated, so $W(n)=O(n^{\log_3 2})$
 .  
 .  
 .  
   * $W(n)=5W(n/4)+n$
 .  
-.  
+.  leaf dominated, so $W(n)=O(n^{\log_4 5})$
 .  
 .  
 .  
   * $W(n)=7W(n/7)+n$
 .  
-.  
+.  balanced, so $W(n)=O(n\log n)$
 .  
 .  
 .  
   * $W(n)=9W(n/3)+n^2$
 .  
-.  
+.  balanced, so $W(n)=O(n^2\log n)$
 .  
 .  
 .  
   * $W(n)=8W(n/2)+n^3$
 .  
-.  
+.  balanced, so $W(n)=O(n^3\log n)$
 .  
 .  
 .  
   * $W(n)=49W(n/25)+n^{3/2}\log n$
 .  
-.  
+.  root dominated, $W(n)=O(n^{3/2}\log n)$
 .  
 .  
 .  
   * $W(n)=W(n-1)+2$
 .  
-.  
+.  balanced, $W(n)=O(n)$
 .  
 .  
 .  
   * $W(n)= W(n-1)+n^c$, with $c\geq 1$
 .  
-.  
+.  balanced, $W(n)=O(n^{c+1})$
 .  
 .  
 .  
   * $W(n)=W(\sqrt{n})+1$
-
-
+  .  
+.  balanced, $W(n)=O(\log (\log(n)))$
+.  
+.  
+.  
 2. Suppose that for a given task you are choosing between the following three algorithms:
 
   * Algorithm $\mathcal{A}$ solves problems by dividing them into
@@ -80,6 +83,13 @@ and push to your github repository.
     What are the asymptotic running times of each of these algorithms?
     Which algorithm would you choose?
 
+A would be $W(n)=5W(n/2)+O(n)$, it is leaf dominated and $O(n)=n^{\log_2 5}$
+
+B would be $W(n)=2W(n-1)+O(1)$, it is leaf dominated and $O(n)=2^n$
+
+C would be $W(n)=9W(n/3)+O(n^2)$, it is balanced and $O(n)=n^2\log n$
+
+I will choose C. B is clearly the worst one. For A and C, C has lower order exponent so it would be better.
 
 3. Now that you have some practice solving recurrences, let's work on
   implementing some algorithms. In lecture we discussed a divide and
@@ -94,6 +104,26 @@ and push to your github repository.
   variety of inputs to test whether your code scales in the manner
   described by the asymptotic runtime. Please refer to Recitation 3 for some basic implementations, and Eqs (7) and (8) in the slides https://github.com/allan-tulane/cmps2200-slides/blob/main/module-02-recurrences/recurrences-integer-multiplication.ipynb
  
- 
+Use 500,450,400,350,300,250,200,150,100,50 binary bits as input and we run the fuction 20 times per input and get results:
 
+118.89266967773438
 
+101.72820091247559
+
+108.39724540710449
+
+112.26916313171387
+
+110.40902137756348
+
+78.29952239990234
+
+69.81682777404785
+
+55.846214294433594
+
+31.913280487060547
+
+19.947290420532227
+
+We can see it smaller than a quadratic relationship so it is subquaratic.
